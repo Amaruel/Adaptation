@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig'%}
+
+{% block main %}
+<h1>Voici les livres qui ont été adapté</h1>
+    {% for book in books %}
+        <a href="{{ path('book_details', {'id':book.id}) }}">
+            <img src="img/cover/{{ book.bookcover }}" alt="{{ book.title }}" width="200px" height="300px"></a>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+{{ parent() }} || Livres
+{% endblock %}

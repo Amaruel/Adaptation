@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+    <div class="book-presentation">
+        {% if movie.poster %}
+            <img src="../img/poster/{{ movie.poster }}" width="250px" height="400px">
+        {% endif %}
+        <h1>{{ movie.title }}</h1>
+        <h3>{{ movie.category.name }}</h3>
+        {% if movie.time %}
+            <h3>
+                {% if ((movie.time / 60) | round(0,'floor')) != 0 %}
+                    {{ (movie.time / 60) | round(0,'floor') }}
+                    {% if ((movie.time / 60) | round(0,'floor')) <=1 %}
+                        heure
+                    {% else %}heures
+                    {% endif %}
+                {% endif %}
+
+                {% if movie.time % 60 %}
+                    {{ movie.time % 60 }}
+                    {% if ( movie.time % 60 ) <=1 %}
+                        minute
+                    {% else %} minutes
+                    {% endif %}
+                {% endif %}
+            </h3>
+        {% endif %}
+        <h3>Synopsis :</h3>
+        <p>{{ movie.synopsis }}</p>
+    </div>
+<div>
+    <h3>Ce film est basé sur le livre : </h3>
+    {% for book in movie.books %}
+        <a href="{{ path('book_details', {'id':book.id}) }}">{{ book.title }}</a>
+    {% endfor %}
+
+
+    {% endblock %}
+
+    {% block title %}
+    {{ parent() }} || {{ movie.title }}
+{% endblock %}

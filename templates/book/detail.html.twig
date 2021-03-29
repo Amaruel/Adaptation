@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig'%}
+
+{% block main %}
+    <div class="book-presentation">
+    <img class="book-presentation-cover" src="../img/cover/{{ book.bookcover }}" width="250px" height="400px">
+    <h1>{{ book.title }}</h1>
+        <div class="author-presentation">
+        {%  for author in book.authors %}
+            <h3>  {{ author.firstname }} {{ author.name }} ||
+
+                {%  for nationality in author.nationalities %}
+                    {{ nationality.country }}
+                    <img id="author-nationality-flag" src="../img/flag/{{ nationality.flag }}" width="20">
+                {%  endfor %}</h3>
+
+        {%  endfor %}
+        </div>
+        {% if book.categories %}
+        {%  for category in book.categories %}
+            <h3>  {{ category.name }} </h3>
+        {%  endfor %}
+        {%  endif %}
+
+    <p>{{ book.abstract }}</p>
+        <br>
+
+    <p>ISBN : {{ book.ISBN }}</p>
+    <p>Date de publication : {{ book.publicationDate | date("d/m/Y") }}</p>
+        {% if book.publisher %}
+            <p>Editeur : {{ book.publisher.name }} ({{ book.pagination }} pages)</p>
+        {%  endif %}
+
+        <a href="https://www.amazon.fr/s?k={{ book.ISBN }}" target="_blank"><img src="../img/icon/icons8-amazone-500.png" width="50px" height="50px"></a>
+
+    </div>
+    <br><br>
+    <div class="book-adapation">
+        <h2>Les adaptations</h2>
+        {%  for movie in book.movies %}
+            <a href="{{ path('movie_details', {'id':movie.id}) }}">{{ movie.title }}</a>
+        {%  endfor %}
+        {%  for serie in book.series %}
+            <a href="{{ path('serie_details', {'id':serie.id}) }}">{{ serie.title }}</a>
+        {%  endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} || {{ book.title }}
+{% endblock %}

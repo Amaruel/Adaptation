@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig'%}
+
+{% block main %}
+    <div class="book-presentation">
+        <img src="../img/poster/{{ serie.poster }}" width="250px" height="400px">
+        <h1>{{ serie.title }}</h1>
+
+        {{ serie.category.name }}
+        <h4>Synopsis</h4>
+        <p>{{ serie.synopsis }}</p>
+        <br><br>
+        {% for season in serie.seasons %}
+            <div class="season">
+                <h3>Saison {{ season.number }}</h3>
+                <p>{{ season.synopsis }}</p>
+                <table class="episode-presentation">
+                    {% for episode in season.episodes %}
+                    <TR>
+                        <TH> Episode {{ episode.number }} </TH>
+                        <TD> {{ episode.title }} </TD>
+                        {% if episode.duration %}
+                        <TD> {{ episode.duration }} minutes </TD>
+                        {% endif %}
+                    </TR>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} || {{ serie.title }}
+{% endblock %}

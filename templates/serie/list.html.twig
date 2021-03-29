@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig'%}
+
+{% block main %}
+    <h1>Voici les séries issues de livres</h1>
+    {% for serie in series %}
+        <a href="{{ path('serie_details', {'id':serie.id}) }}">
+            <img src="img/poster/{{ serie.poster }}" width="200px" height="300px"></a>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} || Séries
+{% endblock %}

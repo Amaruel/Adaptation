@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig'%}
+
+{% block main %}
+    <h1>Voici les films issus de livres</h1>
+    {% for movie in movies %}
+        <a href="{{ path('movie_details', {'id':movie.id}) }}"> <img src="img/poster/{{ movie.poster }}" alt="{{ movie.title }}" width="200px" height="300px"></a>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} || Movies
+{% endblock %}

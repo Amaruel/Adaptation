@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block main %}
+<fieldset>
+
+    <legend>Ajouter un livre</legend>
+    {{ form_start(bookForm) }}
+
+    {{ form_widget(bookForm) }}
+    <div class="app-btn-submit">
+    <button type="submit">Ajouter ce livre</button>
+    </div>
+    {{ form_end(bookForm) }}
+</fieldset>
+
+    <button type="button" id="app-btn" onclick="handleClickSpoiler()">
+        L'éditeur n'est pas dans la liste ?</button>
+<br><br>
+    <div id="js-form-spoiler" class ="app-spoiler">
+        <fieldset>
+            <legend>Ajouter un éditeur</legend>
+        {{ form_start(publisherForm) }}
+        {{ form_widget(publisherForm) }}
+            <div class="app-btn-submit">
+        <button type="submit">Ajouter cet éditeur</button>
+            </div>
+        {{ form_end(publisherForm) }}
+        </fieldset>
+    </div>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} || Ajouter un livre
+{% endblock %}
